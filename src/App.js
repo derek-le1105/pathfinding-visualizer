@@ -1,5 +1,5 @@
 import './App.css'
-import Visualizer from './Visualizer'
+import Visualizer from './Visualizer/Visualizer'
 
 function App() {
     return (

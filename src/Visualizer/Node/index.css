@@ -1,5 +1,17 @@
-.node-container {
-    height: 25px;
+.node {
     width: 25px;
-    outline: 1px solid;
+    height: 25px;
+    outline: 1px solid rgb(175, 216, 248);
+  }
+
+.node.starting {
+  background-color: green;
+}
+
+.node.finishing {
+  background-color: red;
+}
+
+.node.wall {
+  background-color: rgb(12, 53, 71);
 }
