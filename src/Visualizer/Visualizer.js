@@ -15,9 +15,9 @@ let ROW = 22,
 
 let defaultBoard = []
 
-console.log(START_NODE, END_NODE)
-
 const Visualizer = () => {
+  let algoList = ['Breadth First Search', 'Depth First Search', 'A Star Search']
+
   const generateGrid = () => {
     const tempGrid = []
     for (let i = 0; i < ROW; i++) {
@@ -142,6 +142,7 @@ const Visualizer = () => {
         setAlgorithm={setAlgorithm}
         startPathFind={startPathFind}
         resetBoard={resetBoard}
+        algoList={algoList}
       />
     </>
   )

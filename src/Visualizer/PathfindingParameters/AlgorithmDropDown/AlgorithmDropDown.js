@@ -3,7 +3,7 @@ import './AlgorithmDropDown.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
-const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
+const AlgorithmDropDown = ({ algorithm, setAlgorithm, algoList }) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleMenuOpen = () => {
@@ -31,26 +31,18 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
       </button>
       {menuOpen && (
         <ul className="algorithm-menu">
-          <li className="menu-item">
-            <button
-              onClick={() => {
-                setAlgorithm('Breadth First Search')
-                setMenuOpen(!menuOpen)
-              }}
-            >
-              Breadth First Search
-            </button>
-          </li>
-          <li className="menu-item">
-            <button
-              onClick={() => {
-                setAlgorithm('Depth First Search')
-                setMenuOpen(!menuOpen)
-              }}
-            >
-              Depth First Search
-            </button>
-          </li>
+          {algoList.map((algo) => (
+            <li className="menu-item">
+              <button
+                onClick={() => {
+                  setAlgorithm(algo)
+                  setMenuOpen(!menuOpen)
+                }}
+              >
+                {algo}
+              </button>
+            </li>
+          ))}
         </ul>
       )}
     </div>
