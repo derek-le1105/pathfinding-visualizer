@@ -3,7 +3,7 @@ import './AlgorithmDropDown.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
-const AlgorithmDropDown = ({ algorithm, setAlgorithm }) => {
+const AlgorithmDropDown = ({ algorithm, setAlgorithm, algoList }) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleMenuOpen = () => {

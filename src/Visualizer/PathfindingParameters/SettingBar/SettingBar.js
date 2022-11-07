@@ -9,6 +9,7 @@ const SettingBar = ({
   setAlgorithm,
   startPathFind,
   resetBoard,
+  algoList,
 }) => {
   return (
     <>
@@ -16,6 +17,7 @@ const SettingBar = ({
         <AlgorithmDropDown
           algorithm={algorithm}
           setAlgorithm={setAlgorithm}
+          algoList={algoList}
         ></AlgorithmDropDown>
         <Button title="Reset Board" task={resetBoard}></Button>
         <Button title="Visualize" task={startPathFind}></Button>
