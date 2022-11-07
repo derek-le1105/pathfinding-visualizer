@@ -7,11 +7,11 @@ export default class Node extends Component {
     const {
       row,
       col,
+      isVisited,
       isFinish,
       isStart,
       isWall,
       onMouseDown,
-
       onMouseUp,
       onMouseEnter,
     } = this.props

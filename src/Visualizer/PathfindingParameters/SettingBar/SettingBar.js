@@ -3,7 +3,7 @@ import Button from './Button'
 import AlgorithmDropDown from '../AlgorithmDropDown/AlgorithmDropDown'
 import './SettingBar.css'
 
-const SettingBar = ({ algorithm, setAlgorithm }) => {
+const SettingBar = ({ isFinding, algorithm, setAlgorithm, startPathFind }) => {
   return (
     <>
       <div className="setting-bar" style={{ maxWidth: '100%' }}>
@@ -11,7 +11,7 @@ const SettingBar = ({ algorithm, setAlgorithm }) => {
           algorithm={algorithm}
           setAlgorithm={setAlgorithm}
         ></AlgorithmDropDown>
-        <Button title="Visualize"></Button>
+        <Button title="Visualize" task={startPathFind}></Button>
       </div>
     </>
   )

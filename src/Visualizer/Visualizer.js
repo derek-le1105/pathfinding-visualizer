@@ -1,6 +1,8 @@
 import './Visualizer.css'
 import SettingBar from './PathfindingParameters/SettingBar/SettingBar.js'
 import Node from './Node'
+import breadthFirstSearch from './Algorithms/breadthFirstSearch'
+import depthFirstSearch from './Algorithms/depthFirstSearch'
 
 import React, { useState } from 'react'
 
@@ -14,9 +16,9 @@ let ROW = 20,
 const Visualizer = () => {
   const generateGrid = () => {
     const tempGrid = []
-    for (let i = 0; i < COLUMN; i++) {
+    for (let i = 0; i < ROW; i++) {
       const currRow = []
-      for (let j = 0; j < ROW; j++) {
+      for (let j = 0; j < COLUMN; j++) {
         currRow.push(createNewNode(i, j))
       }
       tempGrid.push(currRow)
@@ -30,8 +32,8 @@ const Visualizer = () => {
       col,
       isWall: false,
       isVisited: false,
-      isStartingNode: col === START_NODE[0] && row === START_NODE[1],
-      isFinishingNode: col === END_NODE[0] && row === END_NODE[1],
+      isStartingNode: row === START_NODE[0] && col === START_NODE[1],
+      isFinishingNode: row === END_NODE[0] && col === END_NODE[1],
       previousNode: null,
     }
   }
@@ -67,9 +69,31 @@ const Visualizer = () => {
     }
   }
 
+  const startPathFind = async () => {
+    if (!isFinding) {
+      setIsFinding(true)
+      let [row, col] = START_NODE
+      switch (algorithm) {
+        case 'Algorithm':
+          alert('Please select a sorting algorithm in the dropdown below')
+          break
+        case 'Breadth First Search':
+          await breadthFirstSearch({ grid, setGrid, START_NODE, END_NODE })
+          break
+        case 'Depth First Search':
+          await depthFirstSearch({ grid, setGrid })
+          break
+        default:
+          break
+      }
+      setIsFinding(false)
+    }
+  }
+
   const [grid, setGrid] = useState(generateGrid())
   const [mouseHeld, setMouseHeld] = useState(false)
   const [algorithm, setAlgorithm] = useState('Algorithm')
+  const [isFinding, setIsFinding] = useState(false)
   return (
     <>
       <div className="grid">
@@ -82,6 +106,7 @@ const Visualizer = () => {
                     key={nodeIdx}
                     row={node.row}
                     col={node.col}
+                    isVisited={node.isVisited}
                     isFinish={node.isFinishingNode}
                     isStart={node.isStartingNode}
                     isWall={node.isWall}
@@ -101,7 +126,12 @@ const Visualizer = () => {
           )
         })}
       </div>
-      <SettingBar algorithm={algorithm} setAlgorithm={setAlgorithm} />
+      <SettingBar
+        isFinding={isFinding}
+        algorithm={algorithm}
+        setAlgorithm={setAlgorithm}
+        startPathFind={startPathFind}
+      />
     </>
   )
 }
