@@ -16,7 +16,7 @@ let ROW = 22,
 let defaultBoard = []
 
 const Visualizer = () => {
-  let algoList = ['Breadth First Search', 'Depth First Search']
+  let algoList = ['Breadth First Search', 'Depth First Search', 'A Star Search']
 
   const generateGrid = () => {
     const tempGrid = []
