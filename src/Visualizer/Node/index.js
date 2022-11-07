@@ -11,6 +11,7 @@ export default class Node extends Component {
       isFinish,
       isStart,
       isWall,
+      isPath,
       onMouseDown,
       onMouseUp,
       onMouseEnter,
@@ -18,17 +19,21 @@ export default class Node extends Component {
     //console.log(this.props)
 
     const classDeciderName = isFinish
-      ? ' finishing'
+      ? 'node finishing'
       : isStart
-      ? ' starting'
+      ? 'node starting'
       : isWall
-      ? ' wall'
-      : ''
+      ? 'node wall'
+      : isVisited
+      ? 'node visited'
+      : isPath
+      ? 'node path'
+      : 'node'
 
     return (
       <div
         id={`node-${row}-${col}`}
-        className={`node${classDeciderName}`}
+        className={`${classDeciderName}`}
         onMouseDown={() => onMouseDown(row, col)}
         onMouseUp={() => onMouseUp()}
         onMouseEnter={() => onMouseEnter(row, col)}

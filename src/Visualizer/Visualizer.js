@@ -8,10 +8,14 @@ import React, { useState } from 'react'
 
 // TODO: Fix bug with holding down mouse while on a wall, gives error cursor sometimes
 
-let ROW = 20,
+let ROW = 22,
   COLUMN = 50,
-  START_NODE = [9, 4],
-  END_NODE = [9, 45]
+  START_NODE = [ROW / 2, Math.floor(COLUMN / 4)],
+  END_NODE = [ROW / 2, Math.floor((3 * COLUMN) / 4)]
+
+let defaultBoard = []
+
+console.log(START_NODE, END_NODE)
 
 const Visualizer = () => {
   const generateGrid = () => {
@@ -23,6 +27,7 @@ const Visualizer = () => {
       }
       tempGrid.push(currRow)
     }
+    defaultBoard = tempGrid.concat()
     return tempGrid
   }
 
@@ -35,6 +40,7 @@ const Visualizer = () => {
       isStartingNode: row === START_NODE[0] && col === START_NODE[1],
       isFinishingNode: row === END_NODE[0] && col === END_NODE[1],
       previousNode: null,
+      isPath: false,
     }
   }
 
@@ -51,20 +57,20 @@ const Visualizer = () => {
   }
 
   const onMouseDown = (row, col) => {
-    const newGrid = generateWall(row, col)
-    setGrid(newGrid)
-    console.log('true')
-    setMouseHeld(true)
+    if (!isFinding) {
+      const newGrid = generateWall(row, col)
+      setGrid(newGrid)
+      setMouseHeld(true)
+    }
   }
 
   const onMouseUp = () => {
     console.log('false')
-    setMouseHeld(false)
+    if (!isFinding) setMouseHeld(false)
   }
 
   const onMouseEnter = (row, col) => {
-    console.log(mouseHeld)
-    if (mouseHeld) {
+    if (mouseHeld && !isFinding) {
       onMouseDown(row, col)
     }
   }
@@ -72,22 +78,25 @@ const Visualizer = () => {
   const startPathFind = async () => {
     if (!isFinding) {
       setIsFinding(true)
-      let [row, col] = START_NODE
       switch (algorithm) {
         case 'Algorithm':
           alert('Please select a sorting algorithm in the dropdown below')
           break
         case 'Breadth First Search':
-          await breadthFirstSearch({ grid, setGrid, START_NODE, END_NODE })
+          await breadthFirstSearch({ ROW, COLUMN, grid, setGrid, START_NODE })
           break
         case 'Depth First Search':
-          await depthFirstSearch({ grid, setGrid })
+          await depthFirstSearch({ ROW, COLUMN, grid, setGrid, START_NODE })
           break
         default:
           break
       }
       setIsFinding(false)
     }
+  }
+
+  const resetBoard = () => {
+    if (!isFinding) setGrid(defaultBoard.concat())
   }
 
   const [grid, setGrid] = useState(generateGrid())
@@ -110,6 +119,7 @@ const Visualizer = () => {
                     isFinish={node.isFinishingNode}
                     isStart={node.isStartingNode}
                     isWall={node.isWall}
+                    isPath={node.isPath}
                     onMouseDown={(row, col) => {
                       onMouseDown(row, col)
                     }}
@@ -131,6 +141,7 @@ const Visualizer = () => {
         algorithm={algorithm}
         setAlgorithm={setAlgorithm}
         startPathFind={startPathFind}
+        resetBoard={resetBoard}
       />
     </>
   )
