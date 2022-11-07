@@ -1,8 +1,8 @@
 import './Visualizer.css'
 import SettingBar from './PathfindingParameters/SettingBar/SettingBar.js'
 import Node from './Node'
-import breadthFirstSearch from './Algorithms/breadthFirstSearch'
-import depthFirstSearch from './Algorithms/depthFirstSearch'
+import breadthFirstSearch from './Algorithms/PathFinding/breadthFirstSearch'
+import depthFirstSearch from './Algorithms/PathFinding/depthFirstSearch'
 
 import React, { useState } from 'react'
 
@@ -17,6 +17,7 @@ let defaultBoard = []
 
 const Visualizer = () => {
   let algoList = ['Breadth First Search', 'Depth First Search', 'A Star Search']
+  let mazeList = ['Recursive Division']
 
   const generateGrid = () => {
     const tempGrid = []
@@ -102,6 +103,7 @@ const Visualizer = () => {
   const [grid, setGrid] = useState(generateGrid())
   const [mouseHeld, setMouseHeld] = useState(false)
   const [algorithm, setAlgorithm] = useState('Algorithm')
+  const [maze, setMaze] = useState('Maze')
   const [isFinding, setIsFinding] = useState(false)
   return (
     <>
@@ -140,9 +142,12 @@ const Visualizer = () => {
         isFinding={isFinding}
         algorithm={algorithm}
         setAlgorithm={setAlgorithm}
+        maze={maze}
+        setMaze={setMaze}
         startPathFind={startPathFind}
         resetBoard={resetBoard}
         algoList={algoList}
+        mazeList={mazeList}
       />
     </>
   )

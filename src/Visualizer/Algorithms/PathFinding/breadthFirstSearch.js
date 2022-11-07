@@ -1,4 +1,4 @@
-import asyncTimeout from '../HelperFunctions/asyncTimeout'
+import asyncTimeout from '../../HelperFunctions/asyncTimeout'
 
 let tROW = 0,
   tCOLUMN = 0

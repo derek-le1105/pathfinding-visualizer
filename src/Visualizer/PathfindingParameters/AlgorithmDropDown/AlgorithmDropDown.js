@@ -3,7 +3,7 @@ import './AlgorithmDropDown.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
-const AlgorithmDropDown = ({ algorithm, setAlgorithm, algoList }) => {
+const AlgorithmDropDown = ({ item, setItem, itemList }) => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleMenuOpen = () => {
@@ -16,7 +16,7 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm, algoList }) => {
         onClick={handleMenuOpen}
         style={{ height: `100%`, minWidth: '120px' }}
       >
-        <span>{algorithm} </span>
+        <span>{item} </span>
         {
           //got rotate transition from here
           //https://stackoverflow.com/questions/69656883/i-want-the-arrow-icon-to-flip-up-and-down-every-time-the-state-changes-and-i-wan
@@ -31,11 +31,11 @@ const AlgorithmDropDown = ({ algorithm, setAlgorithm, algoList }) => {
       </button>
       {menuOpen && (
         <ul className="algorithm-menu">
-          {algoList.map((algo) => (
+          {itemList.map((algo) => (
             <li className="menu-item">
               <button
                 onClick={() => {
-                  setAlgorithm(algo)
+                  setItem(algo)
                   setMenuOpen(!menuOpen)
                 }}
               >
