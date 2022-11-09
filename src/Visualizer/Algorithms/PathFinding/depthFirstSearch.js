@@ -1,4 +1,5 @@
 import asyncTimeout from '../../HelperFunctions/asyncTimeout'
+import generatePath from '../../HelperFunctions/generatePath'
 
 let tROW = 0,
   tCOLUMN = 0
@@ -63,12 +64,8 @@ const depthFirstSearch = async ({ ROW, COLUMN, grid, setGrid, START_NODE }) => {
   gridCopy = grid.slice()
   let move = await solve({ START_NODE, setGrid })
   dfsStack = []
-  for (let i = 1; i < move.length; i++) {
-    gridCopy[move[i].row][move[i].col].isVisited = false
-    gridCopy[move[i].row][move[i].col].isPath = true
-    setGrid(gridCopy.concat())
-    await asyncTimeout({ timeout: 1 })
-  }
+
+  generatePath(gridCopy, setGrid, move)
 }
 
 export default depthFirstSearch

@@ -1,4 +1,5 @@
 import asyncTimeout from '../../HelperFunctions/asyncTimeout'
+import generatePath from '../../HelperFunctions/generatePath'
 
 let tROW = 0,
   tCOLUMN = 0
@@ -67,19 +68,12 @@ const breadthFirstSearch = async ({
 }) => {
   tROW = ROW
   tCOLUMN = COLUMN
-  console.log(tROW, tCOLUMN, START_NODE)
   gridCopy = grid.slice()
   let move = await solve({ START_NODE, setGrid })
   rowQueue = []
   colQueue = []
-  for (let i = 1; i < move.length; i++) {
-    //let pathNode = document.getElementById(`node-${move[i].row}-${move[i].col}`)
-    //pathNode.style.backgroundColor = `yellow`
-    gridCopy[move[i].row][move[i].col].isVisited = false
-    gridCopy[move[i].row][move[i].col].isPath = true
-    setGrid(gridCopy.concat())
-    await asyncTimeout({ timeout: 1 })
-  }
+
+  generatePath(gridCopy, setGrid, move)
 }
 
 export default breadthFirstSearch
