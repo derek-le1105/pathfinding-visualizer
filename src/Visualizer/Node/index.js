@@ -34,9 +34,15 @@ export default class Node extends Component {
       <div
         id={`node-${row}-${col}`}
         className={`${classDeciderName}`}
-        onMouseDown={() => onMouseDown(row, col)}
-        onMouseUp={() => onMouseUp()}
-        onMouseEnter={() => onMouseEnter(row, col)}
+        onMouseDown={(e) => {
+          if (e.button === 0) onMouseDown(row, col)
+        }}
+        onMouseUp={(e) => {
+          if (e.button === 0) onMouseUp()
+        }}
+        onMouseEnter={(e) => {
+          if (e.button === 0) onMouseEnter(row, col)
+        }}
       ></div>
     )
   }
