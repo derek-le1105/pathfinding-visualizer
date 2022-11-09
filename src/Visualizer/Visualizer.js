@@ -3,6 +3,7 @@ import SettingBar from './PathfindingParameters/SettingBar/SettingBar.js'
 import Node from './Node'
 import breadthFirstSearch from './Algorithms/PathFinding/breadthFirstSearch'
 import depthFirstSearch from './Algorithms/PathFinding/depthFirstSearch'
+import aStarSearch from './Algorithms/PathFinding/aStarSearch'
 
 import recursiveDivision from './Algorithms/MazeGeneration/recursiveDivision'
 
@@ -90,6 +91,17 @@ const Visualizer = () => {
           break
         case 'Depth First Search':
           await depthFirstSearch({ ROW, COLUMN, grid, setGrid, START_NODE })
+          break
+
+        case 'A Star Search':
+          await aStarSearch({
+            ROW,
+            COLUMN,
+            grid,
+            setGrid,
+            START_NODE,
+            END_NODE,
+          })
           break
         default:
           break
