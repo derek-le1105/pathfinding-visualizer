@@ -9,6 +9,7 @@ const SettingBar = ({
   maze,
   setMaze,
   startPathFind,
+  generateMaze,
   resetBoard,
   algoList,
   mazeList,
@@ -27,6 +28,7 @@ const SettingBar = ({
           itemList={mazeList}
         ></AlgorithmDropDown>
         <Button title="Reset Board" task={resetBoard}></Button>
+        <Button title="Generate maze" task={generateMaze}></Button>
         <Button title="Visualize" task={startPathFind}></Button>
       </div>
     </>

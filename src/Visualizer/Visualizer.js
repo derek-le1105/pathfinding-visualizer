@@ -4,14 +4,16 @@ import Node from './Node'
 import breadthFirstSearch from './Algorithms/PathFinding/breadthFirstSearch'
 import depthFirstSearch from './Algorithms/PathFinding/depthFirstSearch'
 
+import recursiveDivision from './Algorithms/MazeGeneration/recursiveDivision'
+
 import React, { useState } from 'react'
 
 // TODO: Fix bug with holding down mouse while on a wall, gives error cursor sometimes
 
-let ROW = 22,
-  COLUMN = 50,
-  START_NODE = [ROW / 2, Math.floor(COLUMN / 4)],
-  END_NODE = [ROW / 2, Math.floor((3 * COLUMN) / 4)]
+let ROW = 21,
+  COLUMN = 49,
+  START_NODE = [Math.floor(ROW / 2), Math.floor(COLUMN / 4)],
+  END_NODE = [Math.floor(ROW / 2), Math.floor((3 * COLUMN) / 4)]
 
 let defaultBoard = []
 
@@ -96,6 +98,18 @@ const Visualizer = () => {
     }
   }
 
+  const generateMaze = async () => {
+    if (!isFinding) {
+      switch (maze) {
+        case 'Recursive Division':
+          await recursiveDivision({ ROW, COLUMN, grid, setGrid })
+          break
+        default:
+          break
+      }
+    }
+  }
+
   const resetBoard = () => {
     if (!isFinding) setGrid(defaultBoard.concat())
   }
@@ -145,6 +159,7 @@ const Visualizer = () => {
         maze={maze}
         setMaze={setMaze}
         startPathFind={startPathFind}
+        generateMaze={generateMaze}
         resetBoard={resetBoard}
         algoList={algoList}
         mazeList={mazeList}
