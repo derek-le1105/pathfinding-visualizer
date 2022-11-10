@@ -42,7 +42,7 @@ const expandNode = async (node, grid, setGrid, priorityQueue, END_NODE) => {
   setGrid(grid.concat())
   await asyncTimeout({ timeout: 10 })
 
-  console.log(priorityQueue)
+  //console.log(priorityQueue)
 }
 
 const aStarSearch = async ({
@@ -63,7 +63,6 @@ const aStarSearch = async ({
   while (!nodes.isEmpty() && !finishNodeFound) {
     let currNode = nodes.dequeue()
     if (currNode.getElement().isFinishingNode) {
-      console.log(currNode.getElement())
       for (
         let it = currNode.getElement().previousNode;
         it != null;

@@ -8,6 +8,7 @@ import aStarSearch from './Algorithms/PathFinding/aStarSearch'
 import recursiveDivision from './Algorithms/MazeGeneration/recursiveDivision'
 
 import React, { useState } from 'react'
+import asyncTimeout from './HelperFunctions/asyncTimeout'
 
 // TODO: Fix bug with holding down mouse while on a wall, gives error cursor sometimes
 
@@ -49,7 +50,7 @@ const Visualizer = () => {
   }
 
   const generateWall = (row, col) => {
-    const newGrid = grid.slice()
+    const newGrid = grid.concat()
     const currNode = newGrid[row][col]
     const nodeChanged = {
       ...currNode,
@@ -80,7 +81,7 @@ const Visualizer = () => {
   }
 
   const startPathFind = async () => {
-    if (!isFinding) {
+    if (!isFinding && !isGeneratingMaze) {
       setIsFinding(true)
       switch (algorithm) {
         case 'Algorithm':
@@ -111,7 +112,8 @@ const Visualizer = () => {
   }
 
   const generateMaze = async () => {
-    if (!isFinding) {
+    if (!isFinding && !isGeneratingMaze) {
+      setIsGeneratingMaze(true)
       switch (maze) {
         case 'Recursive Division':
           await recursiveDivision({ ROW, COLUMN, grid, setGrid })
@@ -119,14 +121,27 @@ const Visualizer = () => {
         default:
           break
       }
+      setIsGeneratingMaze(false)
+      setGridMaze(JSON.parse(JSON.stringify(grid))) //deep copy grid array
     }
   }
 
   const resetBoard = () => {
-    if (!isFinding) setGrid(defaultBoard.concat())
+    if (!isFinding && !isGeneratingMaze) {
+      setGrid(defaultBoard.concat())
+      setGridMaze(defaultBoard.concat())
+    }
+  }
+
+  const resetPath = () => {
+    if (!isFinding && !isGeneratingMaze) {
+      setGrid(JSON.parse(JSON.stringify(gridMaze)))
+    }
   }
 
   const [grid, setGrid] = useState(generateGrid())
+  const [gridMaze, setGridMaze] = useState([])
+  const [isGeneratingMaze, setIsGeneratingMaze] = useState(false)
   const [mouseHeld, setMouseHeld] = useState(false)
   const [algorithm, setAlgorithm] = useState('Algorithm')
   const [maze, setMaze] = useState('Maze')
@@ -175,6 +190,7 @@ const Visualizer = () => {
         resetBoard={resetBoard}
         algoList={algoList}
         mazeList={mazeList}
+        resetPath={resetPath}
       />
     </>
   )

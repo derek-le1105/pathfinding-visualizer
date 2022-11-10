@@ -13,6 +13,7 @@ const SettingBar = ({
   resetBoard,
   algoList,
   mazeList,
+  resetPath,
 }) => {
   return (
     <>
@@ -29,6 +30,7 @@ const SettingBar = ({
         ></AlgorithmDropDown>
         <Button title="Reset Board" task={resetBoard}></Button>
         <Button title="Generate maze" task={generateMaze}></Button>
+        <Button title="Clear Path" task={resetPath}></Button>
         <Button title="Visualize" task={startPathFind}></Button>
       </div>
     </>
