@@ -1,10 +1,10 @@
 .node {
-    width: 40px;
-    height: 40px;
-    outline: 1px solid rgb(175, 216, 248);
-    display: inline-block;
-    margin-bottom: -4px;
-  }
+  width: 25px;
+  height: 25px;
+  outline: 1px solid rgb(175, 216, 248);
+  display: inline-block;
+  margin-bottom: -4px;
+}
 
 .node.starting {
   background-color: green;
@@ -14,7 +14,7 @@
   background-color: red;
 }
 
-.node.wall{
+.node.wall {
   animation-name: wallAnimation;
   animation-duration: 0.3s;
   animation-timing-function: ease-out;
@@ -27,12 +27,12 @@
 
 @keyframes wallAnimation {
   0% {
-    transform: scale(.3);
+    transform: scale(0.3);
     background-color: rgb(12, 53, 71);
   }
 
   100% {
-    transform: scale(1.0);
+    transform: scale(1);
     background-color: rgb(12, 53, 71);
   }
 }
