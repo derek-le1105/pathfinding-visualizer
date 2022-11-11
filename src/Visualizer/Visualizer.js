@@ -65,6 +65,7 @@ const Visualizer = () => {
     if (!isFinding) {
       const newGrid = generateWall(row, col)
       setGrid(newGrid)
+      setGridMaze(JSON.parse(JSON.stringify(newGrid)))
       setMouseHeld(true)
     }
   }
@@ -112,7 +113,8 @@ const Visualizer = () => {
   }
 
   const generateMaze = async () => {
-    if (!isFinding && !isGeneratingMaze) {
+    if (gridMaze.length !== 0) resetBoard()
+    if (!isFinding && !isGeneratingMaze && gridMaze.length === 0) {
       setIsGeneratingMaze(true)
       switch (maze) {
         case 'Recursive Division':
@@ -129,7 +131,7 @@ const Visualizer = () => {
   const resetBoard = () => {
     if (!isFinding && !isGeneratingMaze) {
       setGrid(defaultBoard.concat())
-      setGridMaze(defaultBoard.concat())
+      setGridMaze([])
     }
   }
 
