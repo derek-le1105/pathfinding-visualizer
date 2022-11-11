@@ -8,9 +8,8 @@ var tCOL
 const manhattanDistance = (node, END_NODE) => {
   let currRow = node.row
   let currCol = node.col
-  let distance = 0
-  for (let i = currRow; i < END_NODE[0]; ++i) distance++
-  for (let j = currCol; j < END_NODE[1]; ++j) distance++
+  let distance =
+    Math.abs(END_NODE[0] - currRow) + Math.abs(END_NODE[1] - currCol)
   return distance
 }
 
@@ -62,6 +61,7 @@ const aStarSearch = async ({
 
   while (!nodes.isEmpty() && !finishNodeFound) {
     let currNode = nodes.dequeue()
+    if (currNode.getElement().isVisited) continue
     if (currNode.getElement().isFinishingNode) {
       for (
         let it = currNode.getElement().previousNode;
